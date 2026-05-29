@@ -65,7 +65,7 @@
                                     fechas: [
                                         { label: 'Inicio de pruebas QA por ente rector', value: '17/12/2025' },
                                         { label: 'Fin de pruebas QA por ente rector', value: '19/02/2026' },
-                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector', value: '28/04/2026' }
+                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector (Responsable DISI)', value: '28/04/2026', highlightBlue: true }
                                     ],
                                     responsable: 'Clara Flores / Edgar Herrarte / Alex de León',
                                     estatus: 'Finalizado',
@@ -87,7 +87,7 @@
                                     fechas: [
                                         { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
                                         { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
-                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector', value: '28/04/2026' }
+                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector (Responsable DISI)', value: '28/04/2026', highlightBlue: true }
                                     ],
                                     responsable: 'Clara Flores, Melany Zac Cardona, Alex Eduardo de León Hernández, Sandra Jerónimo, Valeria Salvatierra',
                                     estatus: 'Finalizado',
@@ -120,8 +120,8 @@
                                     fechas: [
                                         { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
                                         { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
-                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector', value: '21/07/2026' },
-                                        { label: 'Inicio de Pruebas QA 002', value: '24/07/2026', highlight: true }
+                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector (Responsable DISI)', value: '21/07/2026', highlightBlue: true },
+                                        { label: 'Inicio de Pruebas QA 002 (Responsable PAM)', value: '24/07/2026', highlight: true }
                                     ],
                                     responsable: 'Lesly De León, Carmelina Hernández, Cecilia Mérida, Lucero Barrios, Alejandra Beltetón, Valeria Salvatierra, Clara Flores, Sharon Cisneros',
                                     estatus: 'En proceso',
@@ -131,7 +131,7 @@
                                         aAtender: 8,
                                         atendidas: 0,
                                         pendientes: 8,
-                                        observacion: '8 Observaciones de QA identificadas. Según cronograma, la solventación de estas correcciones finalizará el 08 de mayo de 2026.'
+                                        observacion: 'Las fechas se ajustaron debido a que los esfuerzos se concentraron en dos frentes prioritarios: la entrega —ya efectuada— del módulo de control financiero y del Módulo de generación de carnets y notificaciones, así como el fortalecimiento de la infraestructura de seguridad en 21 sistemas del Ministerio de Trabajo y Previsión Social, como medida de respuesta ante contingencias tecnológicas recientes para garantizar la continuidad operativa.'
                                     }
                                 }
                             ] 
@@ -149,8 +149,8 @@
                                     fechas: [
                                         { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
                                         { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
-                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector', value: '23/06/2026' },
-                                        { label: 'Inicio de Pruebas QA 002', value: '26/06/2026', highlight: true }
+                                        { label: 'Fin de Desarrollo de correcciones enviadas por ente rector (Responsable DISI)', value: '23/06/2026', highlightBlue: true },
+                                        { label: 'Inicio de Pruebas QA 002 (Responsable PAM)', value: '26/06/2026', highlight: true }
                                     ],
                                     responsable: 'David García, César Oliva',
                                     estatus: 'En proceso',
@@ -160,7 +160,7 @@
                                         aAtender: 8,
                                         atendidas: 0,
                                         pendientes: 8,
-                                        observacion: '8 Observaciones de QA enviadas el 31 de marzo. Se proyecta la finalización de las correcciones para el 01 de junio de 2026 según cronograma.'
+                                        observacion: 'Las fechas se ajustaron debido a que los esfuerzos se concentraron en dos frentes prioritarios: la entrega —ya efectuada— del módulo de control financiero y del Módulo de generación de carnets y notificaciones, así como el fortalecimiento de la infraestructura de seguridad en 21 sistemas del Ministerio de Trabajo y Previsión Social, como medida de respuesta ante contingencias tecnológicas recientes para garantizar la continuidad operativa.'
                                     }
                                 }
                             ] 
@@ -257,15 +257,17 @@
                 <!-- MAIN AREA -->
                 <div class="max-w-7xl mx-auto px-6 lg:px-12 -mt-6 pb-12">
                     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-                        <div class="bg-white border-b border-gray-100 p-6 sm:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                            <div>
-                                <h2 class="text-2xl font-bold text-gray-800">
-                                    Resumen Ejecutivo: <span class="text-blue-600">${proyectoActivo.nombre}</span>
-                                </h2>
-                            </div>
-                            <div class="flex items-center px-4 py-2 rounded-full border-2 font-bold ${getEstatusColor(proyectoActivo.qaData.estatusGeneral)}">
-                                <i data-lucide="${getEstatusIcon(proyectoActivo.qaData.estatusGeneral)}" class="w-5 h-5 mr-2"></i>
-                                <span class="uppercase text-xs">${proyectoActivo.qaData.estatusGeneral}</span>
+                        <div class="bg-white border-b border-gray-100 p-6 sm:px-10 flex flex-col gap-5">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-800">
+                                        Resumen Ejecutivo: <span class="text-blue-600">${proyectoActivo.nombre}</span>
+                                    </h2>
+                                </div>
+                                <div class="flex items-center px-4 py-2 rounded-full border-2 font-bold ${getEstatusColor(proyectoActivo.qaData.estatusGeneral)}">
+                                    <i data-lucide="${getEstatusIcon(proyectoActivo.qaData.estatusGeneral)}" class="w-5 h-5 mr-2"></i>
+                                    <span class="uppercase text-xs">${proyectoActivo.qaData.estatusGeneral}</span>
+                                </div>
                             </div>
                         </div>
 
@@ -298,7 +300,7 @@
                             ${pruebaActiva && !pruebaActiva.isPlaceholder ? `
                                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 animate-fade-in">
                                     <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-start">
                                             <div>
                                                 <p class="text-xs text-gray-400 mb-1 font-bold uppercase">Código de la Prueba</p>
                                                 <p class="text-lg font-bold text-gray-800 flex items-center">
@@ -311,23 +313,23 @@
                                                     <i data-lucide="user" class="w-5 h-5 mr-2 text-blue-500 shrink-0"></i> ${pruebaActiva.responsable}
                                                 </p>
                                             </div>
-                                        </div>
-                                        <div class="flex flex-wrap gap-y-4 gap-x-8 pt-6 border-t border-gray-50 mt-6">
-                                            ${(pruebaActiva.fechas || [
-                                                { label: 'Fin de Desarrollo', value: pruebaActiva.fechaInicio },
-                                                { label: 'Inicio de Pruebas QA 002', value: pruebaActiva.fechaFinalizacion }
-                                            ]).map(function(f) {
-                                                if (f.highlight) {
-                                                    return '<div class="max-w-[180px] bg-green-50 px-3 py-2 rounded-lg border border-green-200 shadow-sm"><p class="text-[10px] text-green-700 mb-1 font-black uppercase leading-tight">' + f.label + '</p><p class="text-sm font-black text-green-800 flex items-center"><i data-lucide="check-circle" class="w-4 h-4 mr-2 text-green-600 shrink-0"></i> ' + f.value + '</p></div>';
-                                                }
-                                                return '<div class="max-w-[180px]"><p class="text-[10px] text-gray-400 mb-1 font-bold uppercase leading-tight">' + f.label + '</p><p class="text-sm font-bold text-gray-700 flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2 text-blue-400 shrink-0"></i> ' + f.value + '</p></div>';
-                                            }).join('')}
-                                            <div class="max-w-[160px] flex flex-col justify-end">
-                                                <div class="inline-flex items-center px-3 py-1 rounded-full border text-[10px] font-black mt-1 ${getEstatusColor(pruebaActiva.estatus)}">
+                                            <div class="flex justify-start sm:justify-end">
+                                                <div class="inline-flex items-center px-3 py-1 rounded-full border text-[10px] font-black ${getEstatusColor(pruebaActiva.estatus)}">
                                                     <i data-lucide="${getEstatusIcon(pruebaActiva.estatus)}" class="w-3 h-3 mr-1"></i>
                                                     <span class="uppercase">${pruebaActiva.estatus}</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-gray-50 mt-6">
+                                            ${(pruebaActiva.fechas || []).map(function(f) {
+                                                if (f.highlight) {
+                                                    return '<div class="bg-green-50 px-4 py-3 rounded-xl border border-green-200 shadow-sm"><p class="text-[10px] text-green-700 mb-1 font-black uppercase leading-tight">' + f.label + '</p><p class="text-sm font-black text-green-800 flex items-center"><i data-lucide="check-circle" class="w-4 h-4 mr-2 text-green-600 shrink-0"></i> ' + f.value + '</p></div>';
+                                                }
+                                                if (f.highlightBlue) {
+                                                    return '<div class="bg-blue-50 px-4 py-3 rounded-xl border border-blue-200 shadow-sm"><p class="text-[10px] text-blue-700 mb-1 font-black uppercase leading-tight">' + f.label + '</p><p class="text-sm font-black text-blue-800 flex items-center"><i data-lucide="info" class="w-4 h-4 mr-2 text-blue-600 shrink-0"></i> ' + f.value + '</p></div>';
+                                                }
+                                                return '<div class="px-2 py-1"><p class="text-[10px] text-gray-400 mb-1 font-bold uppercase leading-tight">' + f.label + '</p><p class="text-sm font-bold text-gray-700 flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2 text-blue-400 shrink-0"></i> ' + f.value + '</p></div>';
+                                            }).join('')}
                                         </div>
                                     </div>
 
