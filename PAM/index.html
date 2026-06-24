@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control QA PAM - Portal Institucional</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -33,10 +31,8 @@
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-    <!-- APP CONTAINER -->
     <div id="app">
-        <!-- El contenido se genera dinámicamente con JavaScript -->
-    </div>
+        </div>
 
     <script>
         // --- DATOS DEL DASHBOARD (EXCLUSIVAMENTE PAM) ---
@@ -142,14 +138,14 @@
                                         { label: 'Inicio de Pruebas QA 002 (Responsable PAM)', value: '01/07/2026', highlight: true }
                                     ],
                                     responsable: 'Lesly De León, Carmelina Hernández, Cecilia Mérida, Lucero Barrios, Alejandra Beltetón, Valeria Salvatierra, Clara Flores, Sharon Cisneros',
-                                    estatus: 'En proceso',
+                                    estatus: 'Finalizado',
                                     correcciones: {
                                         detectadas: 8,
                                         nuevosRequerimientos: 0,
                                         aAtender: 8,
-                                        atendidas: 0,
-                                        pendientes: 8,
-                                        observacion: 'Las fechas se ajustaron debido a que los esfuerzos se concentraron en dos frentes prioritarios: la entrega —ya efectuada— del módulo de control financiero y del Módulo de generación de carnets y notificaciones, así como el fortalecimiento de la infraestructura de seguridad en 21 sistemas del Ministerio de Trabajo y Previsión Social, como medida de respuesta ante contingencias tecnológicas recientes para garantizar la continuidad operativa.'
+                                        atendidas: 8,
+                                        pendientes: 0,
+                                        observacion: 'Las correcciones fueron atendidas en su totalidad, superando el reajuste de esfuerzos requerido por la atención de frentes prioritarios y de infraestructura tecnológica.'
                                     }
                                 }
                             ] 
@@ -171,13 +167,13 @@
                                         { label: 'Inicio de Pruebas QA 002 (Responsable PAM)', value: '19/06/2026', highlight: true }
                                     ],
                                     responsable: 'David García, César Oliva',
-                                    estatus: 'En proceso',
+                                    estatus: 'Finalizado',
                                     correcciones: {
                                         detectadas: 8,
                                         nuevosRequerimientos: 0,
                                         aAtender: 8,
-                                        atendidas: 0,
-                                        pendientes: 8,
+                                        atendidas: 8,
+                                        pendientes: 0,
                                         observacion: 'N/A'
                                     }
                                 }
@@ -201,13 +197,13 @@
                                         { label: 'Inicio de Pruebas QA 002 (Responsable PAM)', value: '18/06/2026', highlight: true }
                                     ],
                                     responsable: 'Alex de León, Clara Flores, Hillary Quieroa, Jose Monterroso, Ligia Lopez, Melany Zac, Sandra Garcia, Valeria Salvatierra',
-                                    estatus: 'En proceso',
+                                    estatus: 'Finalizado',
                                     correcciones: {
                                         detectadas: 18,
                                         nuevosRequerimientos: 1,
                                         aAtender: 11,
-                                        atendidas: 6,
-                                        pendientes: 5,
+                                        atendidas: 11,
+                                        pendientes: 0,
                                         observacion: 'ITem 14 es un nuevo requerimiento (Se pide que se pueda subir el documento de notificación a la gestión del expediente)'
                                     }
                                 }
@@ -261,7 +257,6 @@
                 : (pruebaActiva?.estatus === 'Finalizado' ? 100 : 0);
 
             app.innerHTML = `
-                <!-- NAV -->
                 <nav class="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center sticky top-0 z-50 shadow-sm">
                     <div class="flex items-center space-x-2">
                         <div class="bg-[#0a2e5c] p-2 rounded-lg">
@@ -283,7 +278,6 @@
                     </div>
                 </nav>
 
-                <!-- HEADER HERO (PORTADA SIMPLIFICADA PARA PAM) -->
                 <div class="bg-[#0a2e5c] pt-6 pb-12 px-6 lg:px-12">
                     <div class="max-w-7xl mx-auto">
                         <div class="flex flex-col items-center justify-center text-center py-2">
@@ -300,7 +294,6 @@
                     </div>
                 </div>
 
-                <!-- MAIN AREA -->
                 <div class="max-w-7xl mx-auto px-6 lg:px-12 -mt-6 pb-12">
                     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
                         <div class="bg-white border-b border-gray-100 p-6 sm:px-10 flex flex-col gap-5">
@@ -318,7 +311,6 @@
                         </div>
 
                         <div class="p-6 sm:p-10 bg-gray-50/50">
-                            <!-- Selector de Módulos -->
                             <div class="mb-8 bg-white p-5 rounded-2xl shadow-sm border border-gray-200">
                                 <p class="text-[10px] font-bold text-gray-400 uppercase mb-3">Módulos del Sistema en Revisión</p>
                                 <div class="flex flex-wrap gap-2">
@@ -331,7 +323,6 @@
                                 </div>
                             </div>
 
-                            <!-- Selector de Pruebas -->
                             ${listaPruebas.length > 0 ? `
                                 <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-4">
                                     ${listaPruebas.map((p, index) => `
@@ -342,7 +333,6 @@
                                 </div>
                             ` : ''}
 
-                            <!-- Detalle de Prueba -->
                             ${pruebaActiva && !pruebaActiva.isPlaceholder ? `
                                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 animate-fade-in">
                                     <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
@@ -451,7 +441,6 @@
                     </div>
                 </div>
 
-                <!-- FOOTER -->
                 <footer class="max-w-7xl mx-auto px-6 py-8 text-center border-t border-gray-200 mt-8">
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                         Sistema de Control de Calidad Institucional &copy; 2026 - Acceso Restringido | Visualización para ${proyectoActivo.enteRector}
