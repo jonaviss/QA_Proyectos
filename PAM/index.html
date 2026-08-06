@@ -1,551 +1,537 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    body { font-family: 'Inter', sans-serif; }
-    .progress-ring-circle { transition: stroke-dasharray 0.35s; transform: rotate(-90deg); transform-origin: 50% 50%; }
-    .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  </style>
-</helmet>
-<div ref="{{ containerRef }}" class="bg-gray-50 text-gray-900"></div>
-
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-const proyectosData = [
-  {
-    id: 'pam',
-    nombre: 'PAM',
-    enteRector: 'PAM',
-    descripcion: 'Plataforma de estudio socioeconómico y nómina.',
-    progresoGlobal: 85,
-    icono: 'heart-handshake',
-    qaData: {
-      estatusGeneral: 'En proceso',
-      usaModulos: true,
-      modulos: [
-        {
-          id: 'mod1',
-          nombre: 'Módulo 01: Inscripción',
-          estatusModulo: 'Pendiente acta de aceptación',
-          pruebas: [
-            {
-              id: 1,
-              nombre: 'Prueba QA 001',
-              codigo: 'PAM-M01-QA01-2026',
-              fechaInicio: '19-02-2026',
-              fechaFinalizacion: '28/04/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '17/12/2025' },
-                { label: 'Fin de pruebas QA por ente rector', value: '19/02/2026' },
-                { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '28/04/2026', highlightBlue: true }
-              ],
-              responsable: 'Clara Flores / Edgar Herrarte / Alex de León',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 23, nuevosRequerimientos: 1, aAtender: 22, atendidas: 22, pendientes: 0, observacion: 'Se encuentra pendiente el ítem ID 04, correspondiente a la incorporación de los campos de región y microrregión dentro de la estructura de municipios.' }
-            },
-            {
-              id: 2,
-              nombre: 'Prueba QA 002',
-              codigo: 'PAM-M01-QA02-2026',
-              fechaInicio: '30/03/2026',
-              fechaFinalizacion: '28/04/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
-                { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
-                { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '28/04/2026', highlightBlue: true }
-              ],
-              responsable: 'Clara Flores, Melany Zac Cardona, Alex Eduardo de León Hernández, Sandra Jerónimo, Valeria Salvatierra',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 14, nuevosRequerimientos: 0, aAtender: 14, atendidas: 14, pendientes: 0, observacion: 'Queda pendiente el item con ID 03 el cual será atendido cuando el PAM traslade la información del lugar poblado que necesitan' }
-            },
-            {
-              id: 3,
-              nombre: 'Prueba QA 003',
-              codigo: 'PAM-M01-QA03-2026',
-              fechaInicio: '19/05/2026',
-              fechaFinalizacion: '04/06/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '19/05/2026' },
-                { label: 'Traslado de pruebas QA por ente rector', value: '28/05/2026' },
-                { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '04/06/2026', highlightBlue: true },
-                { label: 'Fecha planificada de inicio de la Prueba QA 004 (a cargo de PAM)', value: '08/06/2026', highlight: true }
-              ],
-              responsable: 'Edgar Herrarte, Alex de León, Clara Flores, Melany Zac, Sandra Mendoza, Valeria Salvatierra',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 14, nuevosRequerimientos: 0, aAtender: 14, atendidas: 14, pendientes: 0, observacion: 'N/A' }
-            },
-            {
-              id: 4,
-              nombre: 'Prueba QA 004',
-              codigo: 'PAM-M01-QA04-2026',
-              fechaInicio: '08/06/2026',
-              fechaFinalizacion: '15/06/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '08/06/2026' },
-                { label: 'Fin de pruebas QA por ente rector', value: '15/06/2026' }
-              ],
-              notaGrande: 'Pendiente acta de aceptación por parte del ente rector',
-              responsable: 'Edgar Herrarte, Alex de León, Clara Flores, Melany Zac, Sandra Mendoza, Valeria Salvatierra',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 7, nuevosRequerimientos: 1, aAtender: 6, atendidas: 6, pendientes: 0, observacion: 'Última prueba del módulo: las correcciones se atendieron en tiempo real. Se definió que el PAM gestionaría el acta de aceptación, la cual fue enviada el 23/06/2026. El nuevo requerimiento consistió en subir una foto del DPI para la Prueba QA 004.' }
-            }
-          ]
-        },
-        {
-          id: 'mod2',
-          nombre: 'Módulo 02: Estudio Socioeconómico',
-          estatusModulo: 'Pruebas de calidad QA en proceso',
-          pruebas: [
-            {
-              id: 1,
-              nombre: 'Prueba QA 001',
-              codigo: 'PAM-M02-QA01-2026',
-              fechaInicio: '30/06/2026',
-              fechaFinalizacion: '01/07/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
-                { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
-                { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '30/06/2026', highlightBlue: true },
-                { label: 'Fecha planificada de inicio de la Prueba QA 002 (a cargo de PAM), según cronograma actualizado enviado por correo el 04/06/2026', value: '01/07/2026', highlight: true }
-              ],
-              responsable: 'Lesly De León, Carmelina Hernández, Cecilia Mérida, Lucero Barrios, Alejandra Beltetón, Valeria Salvatierra, Clara Flores, Sharon Cisneros',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 8, nuevosRequerimientos: 0, aAtender: 8, atendidas: 8, pendientes: 0, observacion: 'Las correcciones fueron atendidas en su totalidad, superando el reajuste de esfuerzos requerido por la atención de frentes prioritarios y de infraestructura tecnológica.' }
-            },
-            {
-              id: 2,
-              nombre: 'Prueba QA 002',
-              codigo: 'PAM-M02-QA02-2026',
-              componentes: ['WEB', 'APP'],
-              fechaInicio: '25/06/2026',
-              fechaFinalizacion: '21/07/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA — WEB (a cargo de PAM)', value: '25/06/2026' },
-                { label: 'Fin de pruebas QA — WEB (a cargo de PAM), sin hallazgos', value: '21/07/2026', highlight: true }
-              ],
-              responsable: 'Clara Guadalupe Flores Recinos, Valeria María Salvatierra Marroquín, Deidra Hillary Quiroa Lopez, Sharon Rossamanda Cisneros Cano, Kimberly Daniela Sunún Avila, Veronica Andrea Soto Rosales, Ligia Janneth Lopez Morales, Carmelina Hernández',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: [
-                'Componente WEB: el PAM indicó que no se identificaron hallazgos, comunicado por medio del oficio DPAEAM-REFMS-vmsm 3785-2026, recibido en DISI el 22/07/2026.',
-                'La capacitación sobre este módulo se realizó el 19/06/2026.',
-                'Las correcciones detectadas en la Prueba QA 001 de la APP ya se encuentran finalizadas.',
-                'Se capacitó al personal del PAM sobre las mejoras implementadas a partir de la QA 001, específicamente para la APP, el 31/07/2026.'
-              ] }
-            }
-          ]
-        },
-        {
-          id: 'mod3',
-          nombre: 'Módulo 03: Jurídico',
-          estatusModulo: 'Pruebas de calidad QA en proceso',
-          pruebas: [
-            {
-              id: 1,
-              nombre: 'Prueba QA 001',
-              codigo: 'PAM-M03-QA01-2026',
-              fechaInicio: '18/06/2026',
-              fechaFinalizacion: '19/06/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
-                { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
-                { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '18/06/2026', highlightBlue: true },
-                { label: 'Fecha planificada de inicio de la Prueba QA 002 (a cargo de PAM)', value: '19/06/2026', highlight: true }
-              ],
-              responsable: 'David García, César Oliva',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 8, nuevosRequerimientos: 0, aAtender: 8, atendidas: 8, pendientes: 0, observacion: 'N/A' }
-            },
-            {
-              id: 2,
-              nombre: 'Prueba QA 002',
-              codigo: 'PAM-M03-QA02-2026',
-              fechaInicio: '27/07/2026',
-              fechaFinalizacion: '',
-              fechas: [
-                { label: 'Inicio de pruebas QA (a cargo de PAM)', value: '27/07/2026' },
-                { label: 'Inconveniente reportado con la matriz de Jurídico', value: '30/07/2026', highlightBlue: true }
-              ],
-              responsable: 'David García, César Oliva',
-              estatus: 'En proceso',
-              correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: [
-                'El 30/07/2026 se presentaron inconvenientes con la matriz de Jurídico, comunicados por medio del oficio DPAM-RFMS-dhq 3950-2026.',
-                'El 31/07/2026, durante la capacitación de la APP de Estudio Socioeconómico, se solicitó información al PAM sobre lo que estaban requiriendo por oficio; sin embargo, los enlaces no tenían conocimiento de lo solicitado para los cambios.',
-                'El PAM solicitó una reunión virtual el 03/08/2026.',
-                'DISI indicó que se trabajaría de manera presencial para mejor comprensión el 04/08/2026.'
-              ] }
-            }
-          ]
-        },
-        { id: 'mod4', nombre: 'Módulo 04: Control financiero', estatusModulo: 'Pruebas QA no iniciadas', pruebas: [],
-          infoAdicional: {
-            titulo: 'Plan de pruebas internas (datos simulados)',
-            pruebasInternas: 300000,
-            etiqueta: 'Datos simulados',
-            secciones: [
-              { titulo: 'Prueba de tareas programadas', items: ['Consulta de fallecidos', 'Dobles pensionados (verificación interinstitucional)', 'Cobros indebidos'] },
-              { titulo: 'Generación de nómina', items: ['PDF de nómina (2,000 hojas)', 'Generar archivo de respaldo (reportes)', 'Tiempo de generación de nómina: 5 min promedio para esta cantidad de datos'] }
-            ]
-          }
-        },
-        {
-          id: 'mod5',
-          nombre: 'Módulo 05: Generación de Carnets y notificaciones',
-          estatusModulo: 'Pendiente acta de aceptación',
-          pruebas: [
-            {
-              id: 1,
-              nombre: 'Prueba QA 001',
-              codigo: 'PAM-M05-QA01-2026',
-              fechaInicio: '19/05/2026',
-              fechaFinalizacion: '17/06/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA por ente rector', value: '19/05/2026' },
-                { label: 'Traslado de pruebas QA por ente rector', value: '28/05/2026' },
-                { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '17/06/2026', highlightBlue: true },
-                { label: 'Fecha planificada de inicio de la Prueba QA 002 (a cargo de PAM)', value: '18/06/2026', highlight: true }
-              ],
-              responsable: 'Alex de León, Clara Flores, Hillary Quieroa, Jose Monterroso, Ligia Lopez, Melany Zac, Sandra Garcia, Valeria Salvatierra',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 18, nuevosRequerimientos: 1, aAtender: 11, atendidas: 11, pendientes: 0, observacion: 'ITem 14 es un nuevo requerimiento (Se pide que se pueda subir el documento de notificación a la gestión del expediente)' }
-            },
-            {
-              id: 2,
-              nombre: 'Prueba QA 002',
-              codigo: 'PAM-M05-QA02-2026',
-              fechaInicio: '19/06/2026',
-              fechaFinalizacion: '21/07/2026',
-              fechas: [
-                { label: 'Inicio de pruebas QA (a cargo de PAM)', value: '19/06/2026' },
-                { label: 'Fin de pruebas QA (a cargo de PAM)', value: '21/07/2026', highlight: true }
-              ],
-              responsable: 'Sandra Garcia, Alex de León, Hillary Quiroa, Ligia López, José Monterroso, Melany Sac, Valeria Salvatierra, Clara Flores',
-              estatus: 'Finalizado',
-              correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: 'No hubo hallazgos en esta prueba. Avance al 100%, solo queda pendiente el acta de aceptación.' }
-            }
-          ]
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control QA - PAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .progress-ring-circle { 
+            transition: stroke-dasharray 0.35s; 
+            transform: rotate(-90deg); 
+            transform-origin: 50% 50%; 
         }
-      ]
-    }
-  }
-];
+        .animate-fade-in { 
+            animation: fadeIn 0.3s ease-out; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="app"></div>
 
-class Component extends DCLogic {
-  state = { indiceModuloActivo: 0, indicePruebaActiva: 0 };
+    <script>
+        // Datos del proyecto
+        const proyectosData = {
+            id: 'pam',
+            nombre: 'PAM',
+            enteRector: 'PAM',
+            descripcion: 'Plataforma de estudio socioeconómico y nómina.',
+            progresoGlobal: 85,
+            icono: 'heart-handshake',
+            qaData: {
+                estatusGeneral: 'En proceso',
+                usaModulos: true,
+                modulos: [
+                    {
+                        id: 'mod1',
+                        nombre: 'Módulo 01: Inscripción',
+                        estatusModulo: 'Pendiente acta de aceptación',
+                        pruebas: [
+                            {
+                                id: 1,
+                                nombre: 'Prueba QA 001',
+                                codigo: 'PAM-M01-QA01-2026',
+                                fechaInicio: '19-02-2026',
+                                fechaFinalizacion: '28/04/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '17/12/2025' },
+                                    { label: 'Fin de pruebas QA por ente rector', value: '19/02/2026' },
+                                    { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '28/04/2026', highlightBlue: true }
+                                ],
+                                responsable: 'Clara Flores / Edgar Herrarte / Alex de León',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 23, nuevosRequerimientos: 1, aAtender: 22, atendidas: 22, pendientes: 0, observacion: 'Se encuentra pendiente el ítem ID 04, correspondiente a la incorporación de los campos de región y microrregión dentro de la estructura de municipios.' }
+                            },
+                            {
+                                id: 2,
+                                nombre: 'Prueba QA 002',
+                                codigo: 'PAM-M01-QA02-2026',
+                                fechaInicio: '30/03/2026',
+                                fechaFinalizacion: '28/04/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
+                                    { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
+                                    { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '28/04/2026', highlightBlue: true }
+                                ],
+                                responsable: 'Clara Flores, Melany Zac Cardona, Alex Eduardo de León Hernández, Sandra Jerónimo, Valeria Salvatierra',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 14, nuevosRequerimientos: 0, aAtender: 14, atendidas: 14, pendientes: 0, observacion: 'Queda pendiente el item con ID 03 el cual será atendido cuando el PAM traslade la información del lugar poblado que necesitan' }
+                            },
+                            {
+                                id: 3,
+                                nombre: 'Prueba QA 003',
+                                codigo: 'PAM-M01-QA03-2026',
+                                fechaInicio: '19/05/2026',
+                                fechaFinalizacion: '04/06/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '19/05/2026' },
+                                    { label: 'Traslado de pruebas QA por ente rector', value: '28/05/2026' },
+                                    { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '04/06/2026', highlightBlue: true },
+                                    { label: 'Fecha planificada de inicio de la Prueba QA 004 (a cargo de PAM)', value: '08/06/2026', highlight: true }
+                                ],
+                                responsable: 'Edgar Herrarte, Alex de León, Clara Flores, Melany Zac, Sandra Mendoza, Valeria Salvatierra',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 14, nuevosRequerimientos: 0, aAtender: 14, atendidas: 14, pendientes: 0, observacion: 'N/A' }
+                            },
+                            {
+                                id: 4,
+                                nombre: 'Prueba QA 004',
+                                codigo: 'PAM-M01-QA04-2026',
+                                fechaInicio: '08/06/2026',
+                                fechaFinalizacion: '15/06/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '08/06/2026' },
+                                    { label: 'Fin de pruebas QA por ente rector', value: '15/06/2026' }
+                                ],
+                                notaGrande: 'Pendiente acta de aceptación por parte del ente rector',
+                                responsable: 'Edgar Herrarte, Alex de León, Clara Flores, Melany Zac, Sandra Mendoza, Valeria Salvatierra',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 7, nuevosRequerimientos: 1, aAtender: 6, atendidas: 6, pendientes: 0, observacion: 'Última prueba del módulo: las correcciones se atendieron en tiempo real. Se definió que el PAM gestionaría el acta de aceptación, la cual fue enviada el 23/06/2026. El nuevo requerimiento consistió en subir una foto del DPI para la Prueba QA 004.' }
+                            }
+                        ]
+                    },
+                    {
+                        id: 'mod2',
+                        nombre: 'Módulo 02: Estudio Socioeconómico',
+                        estatusModulo: 'Pruebas de calidad QA en proceso',
+                        pruebas: [
+                            {
+                                id: 1,
+                                nombre: 'Prueba QA 001',
+                                codigo: 'PAM-M02-QA01-2026',
+                                fechaInicio: '30/06/2026',
+                                fechaFinalizacion: '01/07/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
+                                    { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
+                                    { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '30/06/2026', highlightBlue: true },
+                                    { label: 'Fecha planificada de inicio de la Prueba QA 002 (a cargo de PAM), según cronograma actualizado enviado por correo el 04/06/2026', value: '01/07/2026', highlight: true }
+                                ],
+                                responsable: 'Lesly De León, Carmelina Hernández, Cecilia Mérida, Lucero Barrios, Alejandra Beltetón, Valeria Salvatierra, Clara Flores, Sharon Cisneros',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 8, nuevosRequerimientos: 0, aAtender: 8, atendidas: 8, pendientes: 0, observacion: 'Las correcciones fueron atendidas en su totalidad, superando el reajuste de esfuerzos requerido por la atención de frentes prioritarios y de infraestructura tecnológica.' }
+                            },
+                            {
+                                id: 2,
+                                nombre: 'Prueba QA 002',
+                                codigo: 'PAM-M02-QA02-2026',
+                                componentes: ['WEB', 'APP'],
+                                fechaInicio: '25/06/2026',
+                                fechaFinalizacion: '21/07/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA — WEB (a cargo de PAM)', value: '25/06/2026' },
+                                    { label: 'Fin de pruebas QA — WEB (a cargo de PAM), sin hallazgos', value: '21/07/2026', highlight: true }
+                                ],
+                                responsable: 'Clara Guadalupe Flores Recinos, Valeria María Salvatierra Marroquín, Deidra Hillary Quiroa Lopez, Sharon Rossamanda Cisneros Cano, Kimberly Daniela Sunún Avila, Veronica Andrea Soto Rosales, Ligia Janneth Lopez Morales, Carmelina Hernández',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: ['Componente WEB: el PAM indicó que no se identificaron hallazgos, comunicado por medio del oficio DPAEAM-REFMS-vmsm 3785-2026, recibido en DISI el 22/07/2026.', 'La capacitación sobre este módulo se realizó el 19/06/2026.', 'Las correcciones detectadas en la Prueba QA 001 de la APP ya se encuentran finalizadas.', 'Se capacitó al personal del PAM sobre las mejoras implementadas a partir de la QA 001, específicamente para la APP, el 31/07/2026.'] }
+                            }
+                        ]
+                    },
+                    {
+                        id: 'mod3',
+                        nombre: 'Módulo 03: Jurídico',
+                        estatusModulo: 'Pruebas de calidad QA en proceso',
+                        pruebas: [
+                            {
+                                id: 1,
+                                nombre: 'Prueba QA 001',
+                                codigo: 'PAM-M03-QA01-2026',
+                                fechaInicio: '18/06/2026',
+                                fechaFinalizacion: '19/06/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '24/03/2026' },
+                                    { label: 'Fin de pruebas QA por ente rector', value: '27/03/2026' },
+                                    { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '18/06/2026', highlightBlue: true },
+                                    { label: 'Fecha planificada de inicio de la Prueba QA 002 (a cargo de PAM)', value: '19/06/2026', highlight: true }
+                                ],
+                                responsable: 'David García, César Oliva',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 8, nuevosRequerimientos: 0, aAtender: 8, atendidas: 8, pendientes: 0, observacion: 'N/A' }
+                            },
+                            {
+                                id: 2,
+                                nombre: 'Prueba QA 002',
+                                codigo: 'PAM-M03-QA02-2026',
+                                fechaInicio: '27/07/2026',
+                                fechaFinalizacion: '',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA (a cargo de PAM)', value: '27/07/2026' },
+                                    { label: 'Inconveniente reportado con la matriz de Jurídico', value: '30/07/2026', highlightBlue: true }
+                                ],
+                                responsable: 'David García, César Oliva',
+                                estatus: 'En proceso',
+                                correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: ['El 30/07/2026 se presentaron inconvenientes con la matriz de Jurídico, comunicados por medio del oficio DPAM-RFMS-dhq 3950-2026.', 'El 31/07/2026, durante la capacitación de la APP de Estudio Socioeconómico, se solicitó información al PAM sobre lo que estaban requiriendo por oficio; sin embargo, los enlaces no tenían conocimiento de lo solicitado para los cambios.', 'El PAM solicitó una reunión virtual el 03/08/2026.', 'DISI indicó que se trabajaría de manera presencial para mejor comprensión el 04/08/2026.'] }
+                            }
+                        ]
+                    },
+                    {
+                        id: 'mod4',
+                        nombre: 'Módulo 04: Control financiero',
+                        estatusModulo: 'Pruebas QA no iniciadas',
+                        pruebas: [],
+                        infoAdicional: {
+                            titulo: 'Plan de pruebas internas (datos simulados)',
+                            pruebasInternas: 300000,
+                            etiqueta: 'Datos simulados',
+                            secciones: [
+                                { titulo: 'Prueba de tareas programadas', items: ['Consulta de fallecidos', 'Dobles pensionados (verificación interinstitucional)', 'Cobros indebidos'] },
+                                { titulo: 'Generación de nómina', items: ['PDF de nómina (2,000 hojas)', 'Generar archivo de respaldo (reportes)', 'Tiempo de generación de nómina: 5 min promedio para esta cantidad de datos'] }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'mod5',
+                        nombre: 'Módulo 05: Generación de Carnets y notificaciones',
+                        estatusModulo: 'Pendiente acta de aceptación',
+                        pruebas: [
+                            {
+                                id: 1,
+                                nombre: 'Prueba QA 001',
+                                codigo: 'PAM-M05-QA01-2026',
+                                fechaInicio: '19/05/2026',
+                                fechaFinalizacion: '17/06/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA por ente rector', value: '19/05/2026' },
+                                    { label: 'Traslado de pruebas QA por ente rector', value: '28/05/2026' },
+                                    { label: 'Fecha en que DISI entrega las correcciones solicitadas', value: '17/06/2026', highlightBlue: true },
+                                    { label: 'Fecha planificada de inicio de la Prueba QA 002 (a cargo de PAM)', value: '18/06/2026', highlight: true }
+                                ],
+                                responsable: 'Alex de León, Clara Flores, Hillary Quieroa, Jose Monterroso, Ligia Lopez, Melany Zac, Sandra Garcia, Valeria Salvatierra',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 18, nuevosRequerimientos: 1, aAtender: 11, atendidas: 11, pendientes: 0, observacion: 'ITem 14 es un nuevo requerimiento (Se pide que se pueda subir el documento de notificación a la gestión del expediente)' }
+                            },
+                            {
+                                id: 2,
+                                nombre: 'Prueba QA 002',
+                                codigo: 'PAM-M05-QA02-2026',
+                                fechaInicio: '19/06/2026',
+                                fechaFinalizacion: '21/07/2026',
+                                fechas: [
+                                    { label: 'Inicio de pruebas QA (a cargo de PAM)', value: '19/06/2026' },
+                                    { label: 'Fin de pruebas QA (a cargo de PAM)', value: '21/07/2026', highlight: true }
+                                ],
+                                responsable: 'Sandra Garcia, Alex de León, Hillary Quiroa, Ligia López, José Monterroso, Melany Sac, Valeria Salvatierra, Clara Flores',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: 'No hubo hallazgos en esta prueba. Avance al 100%, solo queda pendiente el acta de aceptación.' }
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
 
-  getProyectoActivo() { return proyectosData[0]; }
+        // Estado de la aplicación
+        let state = {
+            indiceModuloActivo: 0,
+            indicePruebaActiva: 0
+        };
 
-  getEstatusColor(estatus) {
-    switch (estatus) {
-      case 'Finalizado': return 'bg-green-100 text-green-800 border-green-200';
-      case 'En proceso': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'No iniciado': return 'bg-red-100 text-red-800 border-red-200';
-      case 'Pendiente acta de aceptación': return 'bg-green-100 text-green-800 border-green-200';
-      case 'Pruebas QA no iniciadas': return 'bg-gray-100 text-gray-600 border-gray-300';
-      case 'Pruebas de calidad QA': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'Pruebas de calidad QA en proceso': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  }
+        // Utilidades
+        function getEstatusColor(estatus) {
+            const colors = {
+                'Finalizado': 'bg-green-100 text-green-800 border-green-200',
+                'En proceso': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                'No iniciado': 'bg-red-100 text-red-800 border-red-200',
+                'Pendiente acta de aceptación': 'bg-green-100 text-green-800 border-green-200',
+                'Pruebas QA no iniciadas': 'bg-gray-100 text-gray-600 border-gray-300',
+                'Pruebas de calidad QA': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                'Pruebas de calidad QA en proceso': 'bg-yellow-100 text-yellow-800 border-yellow-200'
+            };
+            return colors[estatus] || 'bg-gray-100 text-gray-800 border-gray-200';
+        }
 
-  getEstatusIcon(estatus) {
-    switch (estatus) {
-      case 'Finalizado': return 'check-circle-2';
-      case 'En proceso': return 'clock';
-      case 'No iniciado': return 'alert-circle';
-      case 'Pendiente acta de aceptación': return 'file-signature';
-      case 'Pruebas QA no iniciadas': return 'circle-dashed';
-      case 'Pruebas de calidad QA': return 'search-check';
-      case 'Pruebas de calidad QA en proceso': return 'search-check';
-      default: return 'help-circle';
-    }
-  }
+        function getEstatusIcon(estatus) {
+            const icons = {
+                'Finalizado': 'check-circle-2',
+                'En proceso': 'clock',
+                'No iniciado': 'alert-circle',
+                'Pendiente acta de aceptación': 'file-signature',
+                'Pruebas QA no iniciadas': 'circle-dashed',
+                'Pruebas de calidad QA': 'search-check',
+                'Pruebas de calidad QA en proceso': 'search-check'
+            };
+            return icons[estatus] || 'help-circle';
+        }
 
-  cambiarModulo(index) { this.setState({ indiceModuloActivo: index, indicePruebaActiva: 0 }, () => this.renderApp()); }
-  cambiarPrueba(index) { this.setState({ indicePruebaActiva: index }, () => this.renderApp()); }
+        function cambiarModulo(index) {
+            state.indiceModuloActivo = index;
+            state.indicePruebaActiva = 0;
+            render();
+        }
 
-  componentDidMount() {
-    window.cambiarModulo = (i) => this.cambiarModulo(i);
-    window.cambiarPrueba = (i) => this.cambiarPrueba(i);
-    this.renderApp();
-  }
+        function cambiarPrueba(index) {
+            state.indicePruebaActiva = index;
+            render();
+        }
 
-  renderApp() {
-    const container = this._containerRef && this._containerRef.current;
-    if (!container) return;
-    const proyectoActivo = this.getProyectoActivo();
-    const moduloActivo = proyectoActivo.qaData.modulos[this.state.indiceModuloActivo];
-    const listaPruebas = moduloActivo?.pruebas || [];
-    const pruebaActiva = listaPruebas[this.state.indicePruebaActiva] || null;
+        // Render principal
+        function render() {
+            const moduloActivo = proyectosData.qaData.modulos[state.indiceModuloActivo];
+            const listaPruebas = moduloActivo?.pruebas || [];
+            const pruebaActiva = listaPruebas[state.indicePruebaActiva] || null;
 
-    const avancePrueba = pruebaActiva && pruebaActiva.correcciones && pruebaActiva.correcciones.aAtender > 0
-      ? Math.round((pruebaActiva.correcciones.atendidas / pruebaActiva.correcciones.aAtender) * 100)
-      : (pruebaActiva?.estatus === 'Finalizado' ? 100 : 0);
+            const avancePrueba = pruebaActiva && pruebaActiva.correcciones && pruebaActiva.correcciones.aAtender > 0
+                ? Math.round((pruebaActiva.correcciones.atendidas / pruebaActiva.correcciones.aAtender) * 100)
+                : (pruebaActiva?.estatus === 'Finalizado' ? 100 : 0);
 
-    container.innerHTML = `
-      <nav class="bg-white border-b border-gray-200 px-6 py-2 flex justify-between items-center sticky top-0 z-50 shadow-sm">
-        <div class="flex items-center space-x-2">
-          <span class="font-bold text-gray-800 hidden sm:block">Control QA Proyectos</span>
-        </div>
-        <div>
-          <div class="flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
-            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
-              <i data-lucide="user" class="w-4 h-4"></i>
-            </div>
-            <div class="text-left hidden md:block">
-              <p class="text-xs font-bold text-gray-900 leading-none">Administrador DISI</p>
-              <p class="text-[10px] text-gray-500">${proyectoActivo.enteRector}</p>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div class="bg-[#0a2e5c] pt-2 pb-4 px-6 lg:px-12">
-        <div class="max-w-7xl mx-auto"></div>
-      </div>
-
-      <div class="max-w-full mx-auto px-4 lg:px-6 -mt-2 pb-4">
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-          <div class="bg-white border-b border-gray-100 p-3 sm:px-6 flex flex-col gap-2">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div>
-                <h2 class="text-2xl font-bold text-gray-800">
-                  Programa de Aporte Económico del Adulto Mayor (PAM)
-                </h2>
-              </div>
-              <div class="flex items-center px-4 py-2 rounded-full border-2 font-bold ${this.getEstatusColor(moduloActivo?.estatusModulo || proyectoActivo.qaData.estatusGeneral)}">
-                <i data-lucide="${this.getEstatusIcon(moduloActivo?.estatusModulo || proyectoActivo.qaData.estatusGeneral)}" class="w-5 h-5 mr-2"></i>
-                <span class="uppercase text-xs">${moduloActivo?.estatusModulo || proyectoActivo.qaData.estatusGeneral}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-3 sm:p-4 bg-gray-50/50">
-            <div class="mb-3 bg-white p-2.5 rounded-2xl shadow-sm border border-gray-200">
-              <p class="text-[10px] font-bold text-gray-400 uppercase mb-3">Módulos del Sistema en Revisión</p>
-              <div class="flex flex-wrap items-start gap-2">
-                ${proyectoActivo.qaData.modulos.map((mod, index) => `
-                  <button onclick="cambiarModulo(${index})" class="px-4 py-2.5 rounded-xl font-bold text-sm transition-all border flex flex-col items-start gap-1.5 ${index === this.state.indiceModuloActivo ? 'bg-[#0a2e5c] text-white border-[#0a2e5c] shadow-lg scale-105' : (mod.estatusModulo === 'Pendiente acta de aceptación' ? 'bg-green-50 text-green-800 border-green-200 hover:bg-green-100' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-50')}">
-                    <span class="flex items-center">
-                      ${mod.nombre}
-                      ${mod.pruebas.length > 0 ? `<span class="ml-2 px-1.5 py-0.5 rounded-full text-[10px] ${index === this.state.indiceModuloActivo ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-400'}">${mod.pruebas.length}</span>` : ''}
-                    </span>
-                    ${mod.estatusModulo ? `
-                      <span class="inline-flex items-center px-2 py-0.5 rounded-full border text-[9px] font-black uppercase ${index === this.state.indiceModuloActivo ? 'bg-white/10 text-white border-white/30' : this.getEstatusColor(mod.estatusModulo)}">
-                        <i data-lucide="${this.getEstatusIcon(mod.estatusModulo)}" class="w-2.5 h-2.5 mr-1"></i> ${mod.estatusModulo}
-                      </span>
-                    ` : ''}
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-
-            ${moduloActivo && moduloActivo.infoAdicional ? `
-              <div class="mb-6 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                <p class="text-[11px] font-black text-gray-400 uppercase mb-3 flex items-center">
-                  <i data-lucide="list-checks" class="w-4 h-4 mr-2"></i> ${moduloActivo.infoAdicional.titulo}
-                </p>
-                ${moduloActivo.infoAdicional.pruebasInternas ? `
-                  <div class="flex items-center gap-3 mb-4 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-3 w-fit">
-                    <span class="text-2xl font-black text-indigo-700">${moduloActivo.infoAdicional.pruebasInternas.toLocaleString('es-GT')}</span>
-                    <span class="text-xs font-bold text-indigo-600 uppercase">Pruebas internas — ${moduloActivo.infoAdicional.etiqueta}</span>
-                  </div>
-                ` : ''}
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  ${moduloActivo.infoAdicional.secciones.map((sec, si) => `
-                    <div class="border border-gray-100 rounded-xl p-4">
-                      <p class="text-sm font-bold text-gray-700 mb-2">${si + 1}. ${sec.titulo}</p>
-                      <ul class="space-y-1">
-                        ${sec.items.map(it => `<li class="text-sm text-gray-600 flex items-start"><i data-lucide="minus" class="w-3.5 h-3.5 mr-2 mt-0.5 text-blue-400 shrink-0"></i>${it}</li>`).join('')}
-                      </ul>
+            let html = `
+                <nav class="bg-white border-b border-gray-200 px-6 py-2 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold text-gray-800 hidden sm:block">Control QA Proyectos</span>
                     </div>
-                  `).join('')}
-                </div>
-              </div>
-            ` : ''}
-
-            ${listaPruebas.length > 0 ? `
-              <div class="flex flex-wrap gap-2 mb-3 border-b border-gray-200 pb-2">
-                ${listaPruebas.map((p, index) => `
-                  <button onclick="cambiarPrueba(${index})" class="px-4 py-2 rounded-lg font-bold text-xs transition-all border uppercase tracking-tighter ${index === this.state.indicePruebaActiva ? 'bg-blue-600 text-white border-blue-600 shadow-sm' : 'bg-white text-gray-400 border-gray-200 hover:bg-gray-50'}">
-                    ${p.nombre}
-                  </button>
-                `).join('')}
-              </div>
-            ` : ''}
-
-            ${pruebaActiva && !pruebaActiva.isPlaceholder ? `
-              <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3 animate-fade-in">
-                <div class="lg:col-span-2 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-                    <div>
-                      <div>
-                        <p class="text-xs text-gray-400 mb-1 font-bold uppercase">Código de la Prueba</p>
-                        <p class="text-lg font-bold text-gray-800 flex items-center">
-                          <i data-lucide="activity" class="w-5 h-5 mr-2 text-blue-500"></i> ${pruebaActiva.codigo}
-                        </p>
-                        ${pruebaActiva.componentes ? `
-                          <div class="flex gap-2 mt-2">
-                            ${pruebaActiva.componentes.map(c => `<span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-black uppercase">${c}</span>`).join('')}
-                          </div>
-                        ` : ''}
-                      </div>
-                      <div class="mt-4">
-                        <div class="inline-flex items-center px-3 py-1 rounded-full border text-[10px] font-black ${this.getEstatusColor(pruebaActiva.estatus)}">
-                          <i data-lucide="${this.getEstatusIcon(pruebaActiva.estatus)}" class="w-3 h-3 mr-1"></i>
-                          <span class="uppercase">${pruebaActiva.estatus}</span>
+                    <div class="flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
+                            <i data-lucide="user" class="w-4 h-4"></i>
                         </div>
-                      </div>
+                        <div class="text-left hidden md:block">
+                            <p class="text-xs font-bold text-gray-900 leading-none">Administrador DISI</p>
+                            <p class="text-[10px] text-gray-500">${proyectosData.enteRector}</p>
+                        </div>
                     </div>
-                    <div>
-                      <p class="text-xs text-gray-400 mb-2 font-bold uppercase">Responsables Institucionales</p>
-                      ${pruebaActiva.responsable ? `
-                        <table class="w-full text-sm border border-gray-100 rounded-lg overflow-hidden">
-                          <thead>
-                            <tr class="bg-gray-50 text-gray-400 text-[10px] uppercase font-bold">
-                              <th class="px-3 py-2 text-left w-10">#</th>
-                              <th class="px-3 py-2 text-left">Nombre</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            ${pruebaActiva.responsable.split(/[,/]/).map((r, i) => `
-                              <tr class="border-t border-gray-100">
-                                <td class="px-3 py-2 text-gray-400 font-bold">${i + 1}</td>
-                                <td class="px-3 py-2 text-gray-800 font-semibold">${r.trim()}</td>
-                              </tr>
-                            `).join('')}
-                          </tbody>
-                        </table>
-                      ` : `<p class="text-sm text-gray-400 italic">Pendiente de definir</p>`}
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-gray-50 mt-6">
-                    ${(pruebaActiva.fechas || []).map(function(f) {
-                      if (f.highlight) {
-                        return '<div class="bg-green-50 px-4 py-3 rounded-xl border border-green-200 shadow-sm"><p class="text-[10px] text-green-700 mb-1 font-black uppercase leading-tight">' + f.label + '</p><p class="text-sm font-black text-green-800 flex items-center"><i data-lucide="check-circle" class="w-4 h-4 mr-2 text-green-600 shrink-0"></i> ' + f.value + '</p></div>';
-                      }
-                      if (f.highlightBlue) {
-                        return '<div class="bg-blue-50 px-4 py-3 rounded-xl border border-blue-200 shadow-sm"><p class="text-[10px] text-blue-700 mb-1 font-black uppercase leading-tight">' + f.label + '</p><p class="text-sm font-black text-blue-800 flex items-center"><i data-lucide="info" class="w-4 h-4 mr-2 text-blue-600 shrink-0"></i> ' + f.value + '</p></div>';
-                      }
-                      return '<div class="px-2 py-1"><p class="text-[10px] text-gray-400 mb-1 font-bold uppercase leading-tight">' + f.label + '</p><p class="text-sm font-bold text-gray-700 flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2 text-blue-400 shrink-0"></i> ' + f.value + '</p></div>';
-                    }).join('')}
-                  </div>
-                  ${pruebaActiva.notaGrande ? `
-                    <div class="mt-6 bg-orange-50 border-2 border-orange-200 rounded-xl px-5 py-4 flex items-center">
-                      <i data-lucide="file-signature" class="w-7 h-7 mr-3 text-orange-500 shrink-0"></i>
-                      <p class="text-xl font-black text-orange-800 leading-tight">${pruebaActiva.notaGrande}</p>
-                    </div>
-                  ` : ''}
+                </nav>
+
+                <div class="bg-[#0a2e5c] pt-2 pb-4 px-6 lg:px-12">
+                    <div class="max-w-7xl mx-auto"></div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-                  <p class="text-[11px] text-gray-400 font-bold uppercase mb-4 w-full text-center">Avance en atención de correcciones por DISI</p>
-                  <div class="relative w-36 h-36 flex justify-center items-center">
-                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                      <circle cx="18" cy="18" r="16" fill="none" stroke="#f3f4f6" stroke-width="3"></circle>
-                      <circle cx="18" cy="18" r="16" fill="none" stroke="${pruebaActiva.estatus === 'Finalizado' ? '#22c55e' : '#2563eb'}" stroke-width="3" stroke-dasharray="${avancePrueba}, 100" stroke-linecap="round" class="progress-ring-circle"></circle>
-                    </svg>
-                    <div class="absolute flex flex-col items-center justify-center">
-                      <span class="text-4xl font-black text-gray-800 leading-none">${avancePrueba}<span class="text-lg">%</span></span>
+                <div class="max-w-full mx-auto px-4 lg:px-6 -mt-2 pb-4">
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                        <div class="bg-white border-b border-gray-100 p-3 sm:px-6 flex flex-col gap-2">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-800">
+                                        Programa de Aporte Económico del Adulto Mayor (PAM)
+                                    </h2>
+                                </div>
+                                <div class="flex items-center px-4 py-2 rounded-full border-2 font-bold ${getEstatusColor(moduloActivo?.estatusModulo || proyectosData.qaData.estatusGeneral)}">
+                                    <i data-lucide="${getEstatusIcon(moduloActivo?.estatusModulo || proyectosData.qaData.estatusGeneral)}" class="w-5 h-5 mr-2"></i>
+                                    <span class="uppercase text-xs">${moduloActivo?.estatusModulo || proyectosData.qaData.estatusGeneral}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 sm:p-4 bg-gray-50/50">
+                            <div class="mb-3 bg-white p-2.5 rounded-2xl shadow-sm border border-gray-200">
+                                <p class="text-[10px] font-bold text-gray-400 uppercase mb-3">Módulos del Sistema en Revisión</p>
+                                <div class="flex flex-wrap items-start gap-2">
+                                    ${proyectosData.qaData.modulos.map((mod, index) => `
+                                        <button onclick="cambiarModulo(${index})" class="px-4 py-2.5 rounded-xl font-bold text-sm transition-all border flex flex-col items-start gap-1.5 ${index === state.indiceModuloActivo ? 'bg-[#0a2e5c] text-white border-[#0a2e5c] shadow-lg scale-105' : (mod.estatusModulo === 'Pendiente acta de aceptación' ? 'bg-green-50 text-green-800 border-green-200 hover:bg-green-100' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-50')}">
+                                            <span class="flex items-center">
+                                                ${mod.nombre}
+                                                ${mod.pruebas.length > 0 ? `<span class="ml-2 px-1.5 py-0.5 rounded-full text-[10px] ${index === state.indiceModuloActivo ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-400'}">${mod.pruebas.length}</span>` : ''}
+                                            </span>
+                                            ${mod.estatusModulo ? `
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full border text-[9px] font-black uppercase ${index === state.indiceModuloActivo ? 'bg-white/10 text-white border-white/30' : getEstatusColor(mod.estatusModulo)}">
+                                                    <i data-lucide="${getEstatusIcon(mod.estatusModulo)}" class="w-2.5 h-2.5 mr-1"></i> ${mod.estatusModulo}
+                                                </span>
+                                            ` : ''}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            ${moduloActivo && moduloActivo.infoAdicional ? `
+                                <div class="mb-6 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                                    <p class="text-[11px] font-black text-gray-400 uppercase mb-3 flex items-center">
+                                        <i data-lucide="list-checks" class="w-4 h-4 mr-2"></i> ${moduloActivo.infoAdicional.titulo}
+                                    </p>
+                                    ${moduloActivo.infoAdicional.pruebasInternas ? `
+                                        <div class="flex items-center gap-3 mb-4 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-3 w-fit">
+                                            <span class="text-2xl font-black text-indigo-700">${moduloActivo.infoAdicional.pruebasInternas.toLocaleString('es-GT')}</span>
+                                            <span class="text-xs font-bold text-indigo-600 uppercase">Pruebas internas — ${moduloActivo.infoAdicional.etiqueta}</span>
+                                        </div>
+                                    ` : ''}
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        ${moduloActivo.infoAdicional.secciones.map((sec, si) => `
+                                            <div class="border border-gray-100 rounded-xl p-4">
+                                                <p class="text-sm font-bold text-gray-700 mb-2">${si + 1}. ${sec.titulo}</p>
+                                                <ul class="space-y-1">
+                                                    ${sec.items.map(it => `<li class="text-sm text-gray-600 flex items-start"><i data-lucide="minus" class="w-3.5 h-3.5 mr-2 mt-0.5 text-blue-400 shrink-0"></i>${it}</li>`).join('')}
+                                                </ul>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            ${listaPruebas.length > 0 ? `
+                                <div class="flex flex-wrap gap-2 mb-3 border-b border-gray-200 pb-2">
+                                    ${listaPruebas.map((p, index) => `
+                                        <button onclick="cambiarPrueba(${index})" class="px-4 py-2 rounded-lg font-bold text-xs transition-all border uppercase tracking-tighter ${index === state.indicePruebaActiva ? 'bg-blue-600 text-white border-blue-600 shadow-sm' : 'bg-white text-gray-400 border-gray-200 hover:bg-gray-50'}">
+                                            ${p.nombre}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+
+                            ${pruebaActiva && !pruebaActiva.isPlaceholder ? `
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3 animate-fade-in">
+                                    <div class="lg:col-span-2 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                                            <div>
+                                                <div>
+                                                    <p class="text-xs text-gray-400 mb-1 font-bold uppercase">Código de la Prueba</p>
+                                                    <p class="text-lg font-bold text-gray-800 flex items-center">
+                                                        <i data-lucide="activity" class="w-5 h-5 mr-2 text-blue-500"></i> ${pruebaActiva.codigo}
+                                                    </p>
+                                                    ${pruebaActiva.componentes ? `
+                                                        <div class="flex gap-2 mt-2">
+                                                            ${pruebaActiva.componentes.map(c => `<span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-black uppercase">${c}</span>`).join('')}
+                                                        </div>
+                                                    ` : ''}
+                                                </div>
+                                                <div class="mt-4">
+                                                    <div class="inline-flex items-center px-3 py-1 rounded-full border text-[10px] font-black ${getEstatusColor(pruebaActiva.estatus)}">
+                                                        <i data-lucide="${getEstatusIcon(pruebaActiva.estatus)}" class="w-3 h-3 mr-1"></i>
+                                                        <span class="uppercase">${pruebaActiva.estatus}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-400 mb-2 font-bold uppercase">Responsables Institucionales</p>
+                                                ${pruebaActiva.responsable ? `
+                                                    <table class="w-full text-sm border border-gray-100 rounded-lg overflow-hidden">
+                                                        <thead>
+                                                            <tr class="bg-gray-50 text-gray-400 text-[10px] uppercase font-bold">
+                                                                <th class="px-3 py-2 text-left w-10">#</th>
+                                                                <th class="px-3 py-2 text-left">Nombre</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            ${pruebaActiva.responsable.split(/[,/]/).map((r, i) => `
+                                                                <tr class="border-t border-gray-100">
+                                                                    <td class="px-3 py-2 text-gray-400 font-bold">${i + 1}</td>
+                                                                    <td class="px-3 py-2 text-gray-800 font-semibold">${r.trim()}</td>
+                                                                </tr>
+                                                            `).join('')}
+                                                        </tbody>
+                                                    </table>
+                                                ` : `<p class="text-sm text-gray-400 italic">Pendiente de definir</p>`}
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-gray-50 mt-6">
+                                            ${(pruebaActiva.fechas || []).map(f => {
+                                                if (f.highlight) {
+                                                    return `<div class="bg-green-50 px-4 py-3 rounded-xl border border-green-200 shadow-sm"><p class="text-[10px] text-green-700 mb-1 font-black uppercase leading-tight">${f.label}</p><p class="text-sm font-black text-green-800 flex items-center"><i data-lucide="check-circle" class="w-4 h-4 mr-2 text-green-600 shrink-0"></i> ${f.value}</p></div>`;
+                                                }
+                                                if (f.highlightBlue) {
+                                                    return `<div class="bg-blue-50 px-4 py-3 rounded-xl border border-blue-200 shadow-sm"><p class="text-[10px] text-blue-700 mb-1 font-black uppercase leading-tight">${f.label}</p><p class="text-sm font-black text-blue-800 flex items-center"><i data-lucide="info" class="w-4 h-4 mr-2 text-blue-600 shrink-0"></i> ${f.value}</p></div>`;
+                                                }
+                                                return `<div class="px-2 py-1"><p class="text-[10px] text-gray-400 mb-1 font-bold uppercase leading-tight">${f.label}</p><p class="text-sm font-bold text-gray-700 flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2 text-blue-400 shrink-0"></i> ${f.value}</p></div>`;
+                                            }).join('')}
+                                        </div>
+                                        ${pruebaActiva.notaGrande ? `
+                                            <div class="mt-6 bg-orange-50 border-2 border-orange-200 rounded-xl px-5 py-4 flex items-center">
+                                                <i data-lucide="file-signature" class="w-7 h-7 mr-3 text-orange-500 shrink-0"></i>
+                                                <p class="text-xl font-black text-orange-800 leading-tight">${pruebaActiva.notaGrande}</p>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+
+                                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col justify-center items-center">
+                                        <p class="text-[11px] text-gray-400 font-bold uppercase mb-4 w-full text-center">Avance en atención de correcciones por DISI</p>
+                                        <div class="relative w-36 h-36 flex justify-center items-center">
+                                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                                <circle cx="18" cy="18" r="16" fill="none" stroke="#f3f4f6" stroke-width="3"></circle>
+                                                <circle cx="18" cy="18" r="16" fill="none" stroke="${pruebaActiva.estatus === 'Finalizado' ? '#22c55e' : '#2563eb'}" stroke-width="3" stroke-dasharray="${avancePrueba}, 100" stroke-linecap="round" class="progress-ring-circle"></circle>
+                                            </svg>
+                                            <div class="absolute flex flex-col items-center justify-center">
+                                                <span class="text-4xl font-black text-gray-800 leading-none">${avancePrueba}<span class="text-lg">%</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="text-sm font-black text-gray-400 uppercase mb-2 flex items-center">
+                                    <i data-lucide="activity" class="w-4 h-4 mr-2"></i> Control de Hallazgos y Correcciones
+                                </h3>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+                                    ${[
+                                        { label: 'correcciones a atender por DISI', value: pruebaActiva.correcciones.aAtender, color: 'bg-cyan-50 border-cyan-200 text-cyan-700 ring-1 ring-cyan-100', icon: 'clipboard-list', desc: 'Total de correcciones que DISI debe resolver en esta prueba.' },
+                                        { label: 'correcciones atendidas por DISI', value: pruebaActiva.correcciones.atendidas, color: 'bg-green-50 border-green-100 text-green-600', icon: 'wrench', desc: 'Correcciones que ya fueron resueltas por DISI.' },
+                                        { label: 'nuevos requerimientos', value: pruebaActiva.correcciones.nuevosRequerimientos, color: 'bg-indigo-50 border-indigo-100 text-indigo-600', icon: 'file-plus', desc: 'Solicitudes adicionales identificadas durante las pruebas, distintas a correcciones.' },
+                                        { label: 'total de correcciones detectadas en QA', value: pruebaActiva.correcciones.detectadas, color: 'bg-red-50 border-red-100 text-red-600', icon: 'bug', desc: 'Total de hallazgos identificados durante el proceso de QA.' }
+                                    ].map(stat => `
+                                        <div class="group relative rounded-2xl p-4 border flex flex-col justify-between transition-all hover:shadow-md hover:-translate-y-1 cursor-default ${stat.color}">
+                                            <div class="flex justify-between items-start mb-2">
+                                                <p class="text-[10px] font-black uppercase leading-tight">${stat.label}</p>
+                                                <i data-lucide="${stat.icon}" class="w-4 h-4 opacity-70"></i>
+                                            </div>
+                                            <p class="text-3xl font-black">${stat.value}</p>
+                                            <div class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-56 bg-gray-900 text-white text-xs font-medium rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 shadow-lg">
+                                                ${stat.desc}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+
+                                <div class="rounded-2xl p-4 border ${pruebaActiva.correcciones.pendientes > 0 ? 'bg-orange-50 border-orange-200' : 'bg-green-50 border-green-200'}">
+                                    <div class="flex items-start">
+                                        <div class="mt-1 mr-4">
+                                            <i data-lucide="${pruebaActiva.correcciones.pendientes > 0 ? 'alert-circle' : 'check-circle-2'}" class="w-6 h-6 ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-500' : 'text-green-500'}"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-xs font-black uppercase tracking-widest mb-2 ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-800' : 'text-green-800'}">Observaciones y Estatus de Hallazgos</h4>
+                                            ${Array.isArray(pruebaActiva.correcciones.observacion) ? `
+                                                <ol class="list-decimal list-inside space-y-1 text-sm leading-relaxed font-medium ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-900' : 'text-green-900'}">
+                                                    ${pruebaActiva.correcciones.observacion.map(o => `<li>${o}</li>`).join('')}
+                                                </ol>
+                                            ` : `
+                                                <p class="text-sm leading-relaxed font-medium ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-900' : 'text-green-900'}">${pruebaActiva.correcciones.observacion}</p>
+                                            `}
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="bg-white rounded-3xl p-16 border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-center">
+                                    <div class="bg-gray-50 p-6 rounded-full mb-6">
+                                        <i data-lucide="clipboard-check" class="w-12 h-12 text-gray-300"></i>
+                                    </div>
+                                    <p class="text-gray-500 text-lg font-bold max-w-md mx-auto leading-relaxed">
+                                        Faltan las pruebas con la migración de datos.
+                                    </p>
+                                </div>
+                            `}
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
 
-              <h3 class="text-sm font-black text-gray-400 uppercase mb-2 flex items-center">
-                <i data-lucide="activity" class="w-4 h-4 mr-2"></i> Control de Hallazgos y Correcciones
-              </h3>
+                <footer class="max-w-full mx-auto px-4 py-3 text-center border-t border-gray-200 mt-3">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        Sistema de Control de Calidad Institucional &copy; 2026 - Acceso Restringido | Visualización para ${proyectosData.enteRector}
+                    </p>
+                </footer>
+            `;
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
-                ${[
-                  { label: 'correcciones a atender por DISI', value: pruebaActiva.correcciones.aAtender, color: 'bg-cyan-50 border-cyan-200 text-cyan-700 ring-1 ring-cyan-100', icon: 'clipboard-list', desc: 'Total de correcciones que DISI debe resolver en esta prueba.' },
-                  { label: 'correcciones atendidas por DISI', value: pruebaActiva.correcciones.atendidas, color: 'bg-green-50 border-green-100 text-green-600', icon: 'wrench', desc: 'Correcciones que ya fueron resueltas por DISI.' },
-                  { label: 'nuevos requerimientos', value: pruebaActiva.correcciones.nuevosRequerimientos, color: 'bg-indigo-50 border-indigo-100 text-indigo-600', icon: 'file-plus', desc: 'Solicitudes adicionales identificadas durante las pruebas, distintas a correcciones.' },
-                  { label: 'total de correcciones detectadas en QA', value: pruebaActiva.correcciones.detectadas, color: 'bg-red-50 border-red-100 text-red-600', icon: 'bug', desc: 'Total de hallazgos identificados durante el proceso de QA.' }
-                ].map(stat => `
-                  <div class="group relative rounded-2xl p-4 border flex flex-col justify-between transition-all hover:shadow-md hover:-translate-y-1 cursor-default ${stat.color}">
-                    <div class="flex justify-between items-start mb-2">
-                      <p class="text-[10px] font-black uppercase leading-tight">${stat.label}</p>
-                      <i data-lucide="${stat.icon}" class="w-4 h-4 opacity-70"></i>
-                    </div>
-                    <p class="text-3xl font-black">${stat.value}</p>
-                    <div class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-56 bg-gray-900 text-white text-xs font-medium rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 shadow-lg">
-                      ${stat.desc}
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
+            document.getElementById('app').innerHTML = html;
+            
+            // Inicializar iconos de Lucide después de renderizar
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
 
-              <div class="rounded-2xl p-4 border ${pruebaActiva.correcciones.pendientes > 0 ? 'bg-orange-50 border-orange-200' : 'bg-green-50 border-green-200'}">
-                <div class="flex items-start">
-                  <div class="mt-1 mr-4">
-                    <i data-lucide="${pruebaActiva.correcciones.pendientes > 0 ? 'alert-circle' : 'check-circle-2'}" class="w-6 h-6 ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-500' : 'text-green-500'}"></i>
-                  </div>
-                  <div class="flex-1">
-                    <h4 class="text-xs font-black uppercase tracking-widest mb-2 ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-800' : 'text-green-800'}">Observaciones y Estatus de Hallazgos</h4>
-                    ${Array.isArray(pruebaActiva.correcciones.observacion) ? `
-                      <ol class="list-decimal list-inside space-y-1 text-sm leading-relaxed font-medium ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-900' : 'text-green-900'}">
-                        ${pruebaActiva.correcciones.observacion.map(o => `<li>${o}</li>`).join('')}
-                      </ol>
-                    ` : `
-                      <p class="text-sm leading-relaxed font-medium ${pruebaActiva.correcciones.pendientes > 0 ? 'text-orange-900' : 'text-green-900'}">${pruebaActiva.correcciones.observacion}</p>
-                    `}
-                  </div>
-                </div>
-              </div>
-            ` : `
-              <div class="bg-white rounded-3xl p-16 border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-center">
-                <div class="bg-gray-50 p-6 rounded-full mb-6">
-                  <i data-lucide="clipboard-check" class="w-12 h-12 text-gray-300"></i>
-                </div>
-                <p class="text-gray-500 text-lg font-bold max-w-md mx-auto leading-relaxed ${pruebaActiva && pruebaActiva.fechas ? 'mb-8' : ''}">
-                  ${pruebaActiva && pruebaActiva.mensajePersonalizado ? pruebaActiva.mensajePersonalizado : 'Faltan las pruebas con la migración de datos.'}
-                </p>
-                ${pruebaActiva && pruebaActiva.fechas ? `
-                  <div class="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
-                    ${pruebaActiva.fechas.map(f => `
-                      <div class="bg-white px-4 py-3 rounded-xl border border-gray-200 shadow-sm text-left min-w-[220px]">
-                        <p class="text-[10px] text-gray-400 mb-1 font-bold uppercase leading-tight">${f.label}</p>
-                        <p class="text-sm font-bold text-gray-700 flex items-center">
-                          <i data-lucide="calendar" class="w-4 h-4 mr-2 text-blue-400 shrink-0"></i> ${f.value}
-                        </p>
-                      </div>
-                    `).join('')}
-                  </div>
-                ` : ''}
-              </div>
-            `}
-          </div>
-        </div>
-      </div>
-
-      <footer class="max-w-full mx-auto px-4 py-3 text-center border-t border-gray-200 mt-3">
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-          Sistema de Control de Calidad Institucional &copy; 2026 - Acceso Restringido | Visualización para ${proyectoActivo.enteRector}
-        </p>
-      </footer>
-    `;
-    if (window.lucide) window.lucide.createIcons();
-  }
-
-  renderVals() {
-    if (!this._containerRef) this._containerRef = React.createRef();
-    return { containerRef: this._containerRef };
-  }
-
-  componentDidUpdate() { this.renderApp(); }
-}
-
-</script>
+        // Inicializar la aplicación
+        render();
+    </script>
 </body>
 </html>
