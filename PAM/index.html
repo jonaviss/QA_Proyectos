@@ -41,7 +41,7 @@
                     {
                         id: 'mod1',
                         nombre: 'Módulo 01: Inscripción',
-                        estatusModulo: 'Pendiente acta de aceptación',
+                        estatusModulo: 'Ejercicio de trazabilidad y concurrencia - Finalizado',
                         pruebas: [
                             {
                                 id: 1,
@@ -103,13 +103,33 @@
                                 responsable: 'Edgar Herrarte, Alex de León, Clara Flores, Melany Zac, Sandra Mendoza, Valeria Salvatierra',
                                 estatus: 'Finalizado',
                                 correcciones: { detectadas: 7, nuevosRequerimientos: 1, aAtender: 6, atendidas: 6, pendientes: 0, observacion: 'Última prueba del módulo: las correcciones se atendieron en tiempo real. Se definió que el PAM gestionaría el acta de aceptación, la cual fue enviada el 23/06/2026. El nuevo requerimiento consistió en subir una foto del DPI para la Prueba QA 004.' }
+                            },
+                            {
+                                id: 5,
+                                nombre: 'Prueba QA 005',
+                                codigo: 'PAM-M01-QA05-2026',
+                                fechaInicio: '12/08/2026',
+                                fechaFinalizacion: '12/08/2026',
+                                fechas: [
+                                    { label: 'Prueba de campo en 12 sedes departamentales', value: '12/08/2026, 09:00-13:00' },
+                                    { label: 'Objetivo', value: 'Validar registro masivo, transferencia de datos, capacidad de carga' }
+                                ],
+                                responsable: 'Clara Flores, Valeria Salvatierra',
+                                estatus: 'Finalizado',
+                                correcciones: { detectadas: 5, nuevosRequerimientos: 0, aAtender: 5, atendidas: 5, pendientes: 0, observacion: [
+                                    'Falta de dirección en constancia: la constancia de inscripción no mostraba la dirección del beneficiario (sí aparecía en la constancia negativa). Solventado.',
+                                    'Error en ingreso de DPI de acompañante: el sistema lanzaba error al ingresar el DPI en el campo de acompañante. Solventado.',
+                                    'Validación Número de Apartamento: el campo aceptaba letras cuando debería aceptar solo números. Solventado.',
+                                    'Edición de negativos: se requería bloquear la edición de adultos mayores negativos desde inscripción. Solventado.',
+                                    'Solicitud: agregar "Casco Urbano": se solicitó agregar esta opción en Grupo Habitacional para DPI con esa clasificación. Solventado.'
+                                ] }
                             }
                         ]
                     },
                     {
                         id: 'mod2',
                         nombre: 'Módulo 02: Estudio Socioeconómico',
-                        estatusModulo: 'Pruebas de calidad QA en proceso',
+                        estatusModulo: 'Ejercicio de trazabilidad y concurrencia - Finalizado',
                         pruebas: [
                             {
                                 id: 1,
@@ -141,13 +161,48 @@
                                 responsable: 'Clara Guadalupe Flores Recinos, Valeria María Salvatierra Marroquín, Deidra Hillary Quiroa Lopez, Sharon Rossamanda Cisneros Cano, Kimberly Daniela Sunún Avila, Veronica Andrea Soto Rosales, Ligia Janneth Lopez Morales, Carmelina Hernández',
                                 estatus: 'Finalizado',
                                 correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: ['Componente WEB: el PAM indicó que no se identificaron hallazgos, comunicado por medio del oficio DPAEAM-REFMS-vmsm 3785-2026, recibido en DISI el 22/07/2026.', 'La capacitación sobre este módulo se realizó el 19/06/2026.', 'Las correcciones detectadas en la Prueba QA 001 de la APP ya se encuentran finalizadas.', 'Se capacitó al personal del PAM sobre las mejoras implementadas a partir de la QA 001, específicamente para la APP, el 31/07/2026.'] }
+                            },
+                            {
+                                id: 3,
+                                nombre: 'Prueba QA 003',
+                                codigo: 'PAM-M02-QA03-2026',
+                                fechaInicio: '12/08/2026',
+                                fechaFinalizacion: '31/08/2026',
+                                fechas: [
+                                    { label: 'Planificación de Rutas — Coordinadores regionales', value: '12/08/2026, 14:00-17:00' },
+                                    { label: 'App Móvil — Trabajadores Sociales (multidispositivo)', value: '13/08/2026, 10:00-14:00' },
+                                    { label: 'Técnico Validador — Técnicos validadores', value: '17/08/2026, 10:00-13:00' },
+                                    { label: 'Fecha estimada de solución de pendientes', value: '31/08/2026', highlightBlue: true }
+                                ],
+                                responsable: 'Clara Flores, Valeria Salvatierra',
+                                estatus: 'En proceso',
+                                correcciones: { detectadas: 18, nuevosRequerimientos: 4, aAtender: 14, atendidas: 10, pendientes: 4, observacion: [
+                                    'PLANIFICACIÓN DE RUTAS — Nombre de ruta incorrecto: el botón "Detalles" mostraba "Ruta de Guatemala" en lugar del nombre real de la ruta. Solventado.',
+                                    'PLANIFICACIÓN DE RUTAS — Falta contador de visitas: no existía contador del total de expedientes por departamento. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'PLANIFICACIÓN DE RUTAS — Contador por Lugar Poblado: se requería contador general más contador por lugar poblado. Solventado.',
+                                    'PLANIFICACIÓN DE RUTAS — Filtro múltiple por Lugar Poblado: solicitud de selección múltiple en el filtro de lugar poblado con conteo completo. Solventado.',
+                                    'PLANIFICACIÓN DE RUTAS — Visualización de expedientes realizados: en la vista de calendario web no se visualizaba cuáles expedientes ya fueron realizados desde la app. Mejora post-producción.',
+                                    'PLANIFICACIÓN DE RUTAS — Verificación de expedientes sin asignar: los usuarios necesitaban verificar si quedaron expedientes sin asignar a ruta. Mejora post-producción.',
+                                    'PLANIFICACIÓN DE RUTAS — Sistema expulsaba usuarios: durante las pruebas, el sistema estaba sacando a los usuarios. Solventado.',
+                                    'PLANIFICACIÓN DE RUTAS — Verificar filtros: verificar los filtros en la asignación directa y en la reevaluación, ya que no aparecen; colocar los mismos filtros y que en el Excel aparezca el nombre de las TS. En proceso.',
+                                    'APP MÓVIL — Catálogo incompleto: faltaba agregar "Padre" y "Madre" en el catálogo de integrantes. Se validará que el catálogo sea específico de PAM y se actualizará. En proceso.',
+                                    'APP MÓVIL — Consulta a RENAP: mejora propuesta para consultar RENAP automáticamente al ingresar el DPI de un integrante (post-carga al servidor). Mejora post-producción.',
+                                    'APP MÓVIL — Visualización de expedientes visitados: las TS solicitaban ver la cantidad de expedientes ya visitados. Mejora post-producción.',
+                                    'APP MÓVIL — Conflicto de concurrencia: si dos TS realizaban el mismo expediente, la segunda carga fallaba; se implementó notificación de expediente duplicado. Solventado.',
+                                    'TÉCNICO VALIDADOR — Observaciones no visibles: las observaciones ingresadas por TS en la app no aparecían en la vista del Técnico Validador. Solventado.',
+                                    'TÉCNICO VALIDADOR — Vista de Consulta de Expediente: se necesitaba habilitar la vista de consulta dentro del módulo Técnico Validador. Solventado.',
+                                    'TÉCNICO VALIDADOR — Acceso a respuestas según rol: el Registro de Visita mostraba respuestas del estudio solo a Coordinadores/Director/Subdirector; otros roles no deberían verlas. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'TÉCNICO VALIDADOR — Filtro DPI no funciona: el filtro por DPI en validación de estudios no funcionaba. Solventado.',
+                                    'TÉCNICO VALIDADOR — Foto muy pequeña y cortada: la fotografía aparecía cortada; se solicitó colocar la imagen arriba, en tamaño completo y visible. Solventado.',
+                                    'TÉCNICO VALIDADOR — Observación y pregunta 5 no visibles: no se visualizaba la observación de TS ni la respuesta a la pregunta 5 ("Otro - especificar"). Solventado.'
+                                ] }
                             }
                         ]
                     },
                     {
                         id: 'mod3',
                         nombre: 'Módulo 03: Jurídico',
-                        estatusModulo: 'Pruebas de calidad QA en proceso',
+                        estatusModulo: 'Ejercicio de trazabilidad y concurrencia - Finalizado',
                         pruebas: [
                             {
                                 id: 1,
@@ -178,14 +233,71 @@
                                 responsable: 'David García, César Oliva',
                                 estatus: 'En proceso',
                                 correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: ['El 30/07/2026 se presentaron inconvenientes con la matriz de Jurídico, comunicados por medio del oficio DPAM-RFMS-dhq 3950-2026.', 'El 31/07/2026, durante la capacitación de la APP de Estudio Socioeconómico, se solicitó información al PAM sobre lo que estaban requiriendo por oficio; sin embargo, los enlaces no tenían conocimiento de lo solicitado para los cambios.', 'El PAM solicitó una reunión virtual el 03/08/2026.', 'DISI indicó que se trabajaría de manera presencial para mejor comprensión el 04/08/2026.'] }
+                            },
+                            {
+                                id: 3,
+                                nombre: 'Prueba QA 003',
+                                codigo: 'PAM-M03-QA03-2026',
+                                fechaInicio: '17/08/2026',
+                                fechaFinalizacion: '31/08/2026',
+                                fechas: [
+                                    { label: 'Prueba de campo — Módulo Jurídico', value: '17/08/2026, 14:00-17:00 / 18/08/2026' },
+                                    { label: 'Responsable', value: 'Jurídico y Coordinadores' },
+                                    { label: 'Objetivo', value: 'Validar procesamiento de casos especiales' },
+                                    { label: 'Fecha estimada de solución de pendientes', value: '31/08/2026', highlightBlue: true }
+                                ],
+                                responsable: 'Clara Flores, Valeria Salvatierra',
+                                estatus: 'En proceso',
+                                correcciones: { detectadas: 13, nuevosRequerimientos: 2, aAtender: 11, atendidas: 9, pendientes: 2, observacion: [
+                                    'Peso mínimo PDF: solicitud de dejar el peso mínimo del PDF en 5MB. Solventado.',
+                                    'Documento adicional opcional: el documento adicional debería ser opcional, ya que no siempre se requiere. Solventado.',
+                                    'Envío de resoluciones a Notificaciones: verificar si las resoluciones (pago, suspensión por cobro indebido) se envían automáticamente a Notificadores. Mejora post-producción.',
+                                    'Visualización de resolución en expediente: se requiere visualizar la resolución emitida por el proceso jurídico dentro del expediente. Solventado.',
+                                    'Reasignación con proceso iniciado: permitir reasignar el caso aunque ya esté iniciado el proceso jurídico. Solventado.',
+                                    'Denuncia por Doble Pensión: se necesita documento de resolución y notificación, firmado por el director, que se trasladará al inicio de la revisión previo a la denuncia. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Flujo Jurídico y Notificaciones Jurídico: implementar contingencia — notificaciones reciben, notifican, devuelven a jurídico y cargan documento. Solventado.',
+                                    'Catálogo de etapas MP: solicitud de desagregar más las etapas del MP para agregar al catálogo. Mejora post-producción, depende del catálogo que envíe el PAM.',
+                                    'Cambio de nombre en botón: cambio de nombre del botón "desistimiento" a "finalizar" cuando se decida finalizar. Solventado.',
+                                    'Notificación de pago: después de la firma debe existir una notificación del requerimiento de pago para el doble pensionado con cobro indebido. Solventado.',
+                                    'Cambio de nombre a bitácora: cambiar el nombre de la bitácora MP a solo "Bitácora". Solventado.',
+                                    'Asignación: la asignación debe poder hacerse en todos los estados, no solamente cuando esté finalizado; al asignar, la persona a la que se le quita la solicitud no debe aparecer en el catálogo de personas disponibles. Solventado en el punto 5.',
+                                    'Duplicidad de testigo: el catálogo duplica la fotocopia de testigo/ruego de los documentos de motivo. En proceso, fecha estimada de solución 31/08/2026.'
+                                ] }
                             }
                         ]
                     },
                     {
                         id: 'mod4',
                         nombre: 'Módulo 04: Control financiero',
-                        estatusModulo: 'Pruebas QA no iniciadas',
-                        pruebas: [],
+                        estatusModulo: 'Ejercicio de trazabilidad y concurrencia - Finalizado',
+                        pruebas: [
+                            {
+                                id: 1,
+                                nombre: 'Prueba QA 001',
+                                codigo: 'PAM-M04-QA01-2026',
+                                fechaInicio: '18/08/2026',
+                                fechaFinalizacion: '31/08/2026',
+                                fechas: [
+                                    { label: 'Prueba de campo — Control Financiero', value: '18/08/2026, 09:00-13:00' },
+                                    { label: 'Responsable', value: 'Analistas financieros' },
+                                    { label: 'Objetivo', value: 'Validar nómina, presupuesto, reportes generados por el sistema' },
+                                    { label: 'Fecha estimada de solución de pendientes', value: '31/08/2026', highlightBlue: true }
+                                ],
+                                responsable: 'Clara Flores, Valeria Salvatierra',
+                                estatus: 'En proceso',
+                                correcciones: { detectadas: 9, nuevosRequerimientos: 3, aAtender: 6, atendidas: 2, pendientes: 4, observacion: [
+                                    'Catálogo de variación presupuestaria: crear catálogo para aumentos/disminuciones de presupuesto más campo de observación. Mejora post-producción.',
+                                    'Historial de cambios presupuestarios: mantener historial cuando hay aumento o disminución de presupuesto. Mejora post-producción.',
+                                    'Texto "Generado el": verificar el texto en el detalle de nómina. Solventado.',
+                                    'Rol Subdirector/Jefe PAM: cambio de nomenclatura del rol de "jefe" a "subdirector". En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Discrepancia en nómina: la nómina mostró 60 datos, pero son 57; verificar duplicidad por dirección. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Nómina no imprimible: el PDF de la nómina ya firmada no estaba disponible para impresión. Solventado.',
+                                    'Reporte de Verificación Interinstitucional: el reporte no estaba visible/disponible. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Cambio de nomenclatura CUR a CIR: CUR ahora será CIR (Comprobante Interno de Registro). En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Cards de meses: agregar cantidad de aportes y cantidad de beneficiarios en las cards mensuales. Mejora post-producción.'
+                                ] }
+                            }
+                        ],
                         infoAdicional: {
                             titulo: 'Plan de pruebas internas (datos simulados)',
                             pruebasInternas: 300000,
@@ -199,7 +311,7 @@
                     {
                         id: 'mod5',
                         nombre: 'Módulo 05: Generación de Carnets y notificaciones',
-                        estatusModulo: 'Pendiente acta de aceptación',
+                        estatusModulo: 'Ejercicio de trazabilidad y concurrencia - Finalizado',
                         pruebas: [
                             {
                                 id: 1,
@@ -230,6 +342,31 @@
                                 responsable: 'Sandra Garcia, Alex de León, Hillary Quiroa, Ligia López, José Monterroso, Melany Sac, Valeria Salvatierra, Clara Flores',
                                 estatus: 'Finalizado',
                                 correcciones: { detectadas: 0, nuevosRequerimientos: 0, aAtender: 0, atendidas: 0, pendientes: 0, observacion: 'No hubo hallazgos en esta prueba. Avance al 100%, solo queda pendiente el acta de aceptación.' }
+                            },
+                            {
+                                id: 3,
+                                nombre: 'Prueba QA 003',
+                                codigo: 'PAM-M05-QA03-2026',
+                                fechaInicio: '18/08/2026',
+                                fechaFinalizacion: '31/08/2026',
+                                fechas: [
+                                    { label: 'Prueba de campo — Carné y Notificaciones', value: '18/08/2026, 09:00-12:00' },
+                                    { label: 'Responsable', value: 'Técnicos notificadores y Supervisores' },
+                                    { label: 'Objetivo', value: 'Validar impresión, distribución de notificaciones y carnets' },
+                                    { label: 'Fecha estimada de solución de pendientes', value: '31/08/2026', highlightBlue: true }
+                                ],
+                                responsable: 'Clara Flores, Valeria Salvatierra',
+                                estatus: 'En proceso',
+                                correcciones: { detectadas: 8, nuevosRequerimientos: 1, aAtender: 7, atendidas: 2, pendientes: 5, observacion: [
+                                    'Impresión de carné por lotes: la funcionalidad de impresión por lotes no funcionó. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Fecha y días en módulo: agregar fecha desde que el expediente está en el módulo de carnets, más los días transcurridos. Mejora post-producción.',
+                                    'Notificación negativa no visible: bandeja de negativos para los notificadores. En proceso.',
+                                    'Buscador por DPI en mapa: agregar buscador por DPI en el mapa, integración con Waze y copiar coordenadas. Ya solventado.',
+                                    'Exportar Excel para Supervisor: habilitar el botón "Exportar en CSV para Excel" en la pestaña "Todos los expedientes" para el rol Supervisor. En proceso.',
+                                    'Visualización de resoluciones: habilitar la vista de resoluciones (positiva/negativa) en la sección de Documentos y Fotos para impresión. Ya solventado, fecha estimada de solución 31/08/2026.',
+                                    'Observación TS en resolución negativa: mostrar la observación registrada por el TS en la app del estudio socioeconómico en la resolución negativa. En proceso, fecha estimada de solución 31/08/2026.',
+                                    'Acceso a listado de negativos: validar el acceso de Notificadores al listado de negativos para la gestión de notificaciones. En proceso, fecha estimada de solución 31/08/2026.'
+                                ] }
                             }
                         ]
                     }
@@ -239,7 +376,7 @@
 
         let state = {
             indiceModuloActivo: 0,
-            indicePruebaActiva: 0
+            indicePruebaActiva: (proyectosData.qaData.modulos[0]?.pruebas.length || 1) - 1
         };
 
         function getEstatusColor(estatus) {
@@ -270,7 +407,8 @@
 
         function cambiarModulo(index) {
             state.indiceModuloActivo = index;
-            state.indicePruebaActiva = 0;
+            const pruebas = proyectosData.qaData.modulos[index]?.pruebas || [];
+            state.indicePruebaActiva = pruebas.length > 0 ? pruebas.length - 1 : 0;
             render();
         }
 
@@ -296,10 +434,6 @@
                     <div class="flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
                         <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
                             <i data-lucide="user" class="w-4 h-4"></i>
-                        </div>
-                        <div class="text-left hidden md:block">
-                            <p class="text-xs font-bold text-gray-900 leading-none">Administrador DISI</p>
-                            <p class="text-[10px] text-gray-500">${proyectosData.enteRector}</p>
                         </div>
                     </div>
                 </nav>
@@ -511,11 +645,6 @@
                     </div>
                 </div>
 
-                <footer class="max-w-full mx-auto px-4 py-3 text-center border-t border-gray-200 mt-3">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                        Sistema de Control de Calidad Institucional &copy; 2026 - Acceso Restringido | Visualización para ${proyectosData.enteRector}
-                    </p>
-                </footer>
             `;
 
             document.getElementById('app').innerHTML = html;
